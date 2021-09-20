@@ -8,7 +8,7 @@ namespace Graphs
 {
     static class ConsoleGraph
     {
-        static void addNode(Graph graph, string name)
+        public static void addNode(Graph graph, string name)
         {
             string temp;
             if (graph.GetAdjList.ContainsKey(name))
@@ -22,7 +22,7 @@ namespace Graphs
             }
             Console.WriteLine(temp);
         }
-        static void deleteNode(Graph graph, string name)
+        public static void deleteNode(Graph graph, string name)
         {
             string temp;
             if (graph.GetAdjList.ContainsKey(name))
@@ -36,125 +36,192 @@ namespace Graphs
             }
             Console.WriteLine(temp);
         }
-        static void addEdje(Graph graph, string a, string b)
+        public static void addEdje(Graph graph, string a, string b)
         {
             bool aCheck = graph.GetAdjList.ContainsKey(a);
             bool bCheck = graph.GetAdjList.ContainsKey(b);
-            string temp;
             if (!aCheck && !bCheck)
             {
-                temp = ($"Вершин с именами {a} и {b} не существует");
+                Console.WriteLine($"Вершин с именами {a} и {b} не существует");
+                return;
             }
             if (!aCheck)
             {
-                temp = ($"Вершины с именем {a} не существует");
+                Console.WriteLine($"Вершины с именем {a} не существует");
+                return;
             }
             if (!bCheck)
             {
-                temp = ($"Вершины с именем {b} не существует");
+                Console.WriteLine($"Вершины с именем {b} не существует");
+                return;
             }
             if (graph.GetAdjList[a].ContainsKey(b))
             {
                 if (graph.GetOrientation)
                 {
-                    temp = $"Из вершины {a} в {b} уже существует дуга";
+                    Console.WriteLine($"Из вершины {a} в {b} уже существует дуга");
+                    return;
                 }
                 else
                 {
-                    temp = $"Между вершинами {a} и {b} уже существует ребро";
+                    Console.WriteLine($"Между вершинами {a} и {b} уже существует ребро");
+                    return;
                 }
             }
             if (graph.GetOrientation)
             {
                 graph.addEdjeOr(a, b);
-                temp = $"Дуга из вершины {a} в {b} добавлена";
+                Console.WriteLine($"Дуга из вершины {a} в {b} добавлена");
+                return;
             }
             else
             {
                 graph.addEdje(a, b);
-                temp = $"Ребро между вершинами {a} и {b} добавлено";
+                Console.WriteLine($"Ребро между вершинами {a} и {b} добавлено");
+                return;
             }
-            Console.WriteLine(temp);
         }
-        static void addEdje(Graph graph, string a, string b, int c)
+        public static void addEdje(Graph graph, string a, string b, int c)
         {
             bool aCheck = graph.GetAdjList.ContainsKey(a);
             bool bCheck = graph.GetAdjList.ContainsKey(b);
-            string temp;
             if (!aCheck && !bCheck)
             {
-                temp = ($"Вершин с именами {a} и {b} не существует");
+                Console.WriteLine($"Вершин с именами {a} и {b} не существует");
+                return;
             }
             if (!aCheck)
             {
-                temp = ($"Вершины с именем {a} не существует");
+                Console.WriteLine($"Вершины с именем {a} не существует");
+                return;
             }
             if (!bCheck)
             {
-                temp = ($"Вершины с именем {b} не существует");
+                Console.WriteLine($"Вершины с именем {b} не существует");
+                return;
             }
             if (graph.GetAdjList[a].ContainsKey(b))
             {
                 if (graph.GetOrientation)
                 {
-                    temp = $"Из вершины {a} в {b} уже существует дуга";
+                    Console.WriteLine($"Из вершины {a} в {b} уже существует дуга");
+                    return;
                 }
                 else
                 {
-                    temp = $"Между вершинами {a} и {b} уже существует ребро";
+                    Console.WriteLine($"Между вершинами {a} и {b} уже существует ребро");
+                    return;
                 }
             }
             if (graph.GetOrientation)
             {
                 graph.addEdjeOr(a, b, c);
-                temp = $"Дуга из вершины {a} в {b} добавлена";
+                Console.WriteLine($"Дуга из вершины {a} в {b} добавлена");
+                return;
             }
             else
             {
                 graph.addEdje(a, b, c);
-                temp = $"Ребро между вершинами {a} и {b} добавлено";
+                Console.WriteLine($"Ребро между вершинами {a} и {b} добавлено");
+                return;
             }
-            Console.WriteLine(temp);
         }
-        static void deleteEdje(Graph graph, string a, string b)
+        public static void deleteEdje(Graph graph, string a, string b)
         {
             bool aCheck = graph.GetAdjList.ContainsKey(a);
             bool bCheck = graph.GetAdjList.ContainsKey(b);
             string temp;
             if (!aCheck && !bCheck)
             {
-                temp = ($"Вершин с именами {a} и {b} не существует");
+                Console.WriteLine($"Вершин с именами {a} и {b} не существует");
+                return;
             }
             if (!aCheck)
             {
-                temp = ($"Вершины с именем {a} не существует");
+                Console.WriteLine($"Вершины с именем {a} не существует");
+                return;
             }
             if (!bCheck)
             {
-                temp = ($"Вершины с именем {b} не существует");
+                Console.WriteLine($"Вершины с именем {b} не существует");
+                return;
             }
             if (!graph.GetAdjList[a].ContainsKey(b))
             {
                 if (graph.GetOrientation)
                 {
-                    temp = $"Из вершины {a} в {b} не существует дуги";
+                    Console.WriteLine($"Из вершины {a} в {b} не существует дуги");
+                    return;
                 }
                 else
                 {
-                    temp = $"Между вершинами {a} и {b} не существует ребра";
+                    Console.WriteLine($"Между вершинами {a} и {b} не существует ребра");
+                    return;
                 }
             }
             if (graph.GetOrientation)
             {
                 graph.deleteEdjeOr(a, b);
-                temp = $"Дуга из вершины {a} в {b} удалена";
+                Console.WriteLine($"Дуга из вершины {a} в {b} удалена");
+                return;
             }
             else
             {
                 graph.deleteEdje(a, b);
-                temp = $"Ребро между вершинами {a} и {b} удалено";
+                Console.WriteLine($"Ребро между вершинами {a} и {b} удалено");
+                return;
+            }
+        }
+        public static void showGraph(Graph graph)
+        {
+            bool Weight = graph.GetWeight;
+            bool Orientation = graph.GetOrientation;
+            int amount = graph.GetAmount;
+            string temp="";
+            if (Orientation)
+            {
+                temp += "o ";
+                if (Weight)
+                {
+                    temp += "w ";
+                }
+                temp += $"{amount}";
+            }
+            else
+            {
+                if (Weight)
+                {
+                    temp += "w ";
+                }
+                temp += $"{amount}";
             }
             Console.WriteLine(temp);
+            if (Weight)
+            {
+                foreach (KeyValuePair<string,Dictionary<string,int>> top in graph.GetAdjList)
+                {
+                    temp = "";
+                    temp += top.Key;
+                    foreach (KeyValuePair<string,int> adjTop in top.Value )
+                    {
+                        temp += $" {adjTop.Key} {adjTop.Value}";
+                    }
+                    Console.WriteLine(temp);
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<string, Dictionary<string, int>> top in graph.GetAdjList)
+                {
+                    temp = "";
+                    temp += top.Key;
+                    foreach (KeyValuePair<string, int> adjTop in top.Value)
+                    {
+                        temp += $" {adjTop.Key}";
+                    }
+                    Console.WriteLine(temp);
+                }
+            }
         }
 
     }

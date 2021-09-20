@@ -9,27 +9,7 @@ namespace Graphs
         private bool Weight = false;
         private bool Orientation = false;
         private int amount = 0;
-        public Dictionary<string, Dictionary<string, int>> GetAdjList
-        {
-            get
-            {
-                return AdjList;
-            }
-        }
-        public bool GetWeight
-        {
-            get
-            {
-                return Weight;
-            }
-        }
-        public bool GetOrientation
-        {
-            get
-            {
-                return Orientation;
-            }
-        }
+        
         public Graph()
         {
         }
@@ -40,7 +20,7 @@ namespace Graphs
         }
         public Graph(string file)
         {
-            using (StreamReader fileIn = new StreamReader($"C:/Users/Narut0/source/repos/Graph/Graph/{file}"))
+            using (StreamReader fileIn = new StreamReader($"C:/Users/Narut0/source/repos/Graph/Graph/Graphs/{file}"))
             {
                 List<string> status = new List<string>(fileIn.ReadLine().Split(" "));
                 if (status.Contains("o"))
@@ -97,6 +77,54 @@ namespace Graphs
             Orientation = obj.Orientation;
             amount = obj.amount;
         }
+        public void saveGraph(string file)
+        {
+            using (StreamWriter fileOut = new StreamWriter($"C:/Users/Narut0/source/repos/Graph/Graph/Graphs/{file}"))
+            {
+                string temp = "";
+                if (Orientation)
+                {
+                    temp += "o ";
+                    if (Weight)
+                    {
+                        temp += "w ";
+                    }
+                    temp += $"{amount}";
+                }
+                else
+                {
+                    if (Weight)
+                    {
+                        temp += "w ";
+                    }
+                    temp += $"{amount}";
+                }
+                fileOut.WriteLine(temp);
+                if (Weight)
+                {
+                    foreach (KeyValuePair<string, Dictionary<string, int>> top in AdjList)
+                    {
+                        temp = "";
+                        temp += top.Key;
+                        foreach (KeyValuePair<string, int> adjTop in top.Value)
+                        {
+                            temp += $" {adjTop.Key} {adjTop.Value}";
+                        }
+                        fileOut.WriteLine(temp);
+                    }
+                }
+                foreach (KeyValuePair<string, Dictionary<string, int>> top in AdjList)
+                {
+                    temp = "";
+                    temp += top.Key;
+                    foreach (KeyValuePair<string, int> adjTop in top.Value)
+                    {
+                        temp += $" {adjTop.Key}";
+                    }
+                    fileOut.WriteLine(temp);
+                }
+            }
+        }
         public void addNode(string name)
         {           
                 ++amount;
@@ -138,6 +166,34 @@ namespace Graphs
         {
             AdjList[a].Remove(b);
             AdjList[b].Remove(a);
-        }        
+        }
+        public Dictionary<string, Dictionary<string, int>> GetAdjList
+        {
+            get
+            {
+                return AdjList;
+            }
+        }
+        public bool GetWeight
+        {
+            get
+            {
+                return Weight;
+            }
+        }
+        public bool GetOrientation
+        {
+            get
+            {
+                return Orientation;
+            }
+        }
+        public int GetAmount
+        {
+            get
+            {
+                return amount;
+            }
+        }
     }
 }

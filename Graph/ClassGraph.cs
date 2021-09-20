@@ -5,10 +5,31 @@ namespace Graphs
 {
     public class Graph
     {
-        private Dictionary<string, Dictionary<string, int>> AdjList=new Dictionary<string, Dictionary<string, int>>();
+        private Dictionary<string, Dictionary<string, int>> AdjList = new Dictionary<string, Dictionary<string, int>>();
         private bool Weight = false;
         private bool Orientation = false;
-        private int amount=0;
+        private int amount = 0;
+        public Dictionary<string, Dictionary<string, int>> GetAdjList
+        {
+            get
+            {
+                return AdjList;
+            }
+        }
+        public bool GetWeight
+        {
+            get
+            {
+                return Weight;
+            }
+        }
+        public bool GetOrientation
+        {
+            get
+            {
+                return Orientation;
+            }
+        }
         public Graph()
         {
         }
@@ -76,157 +97,47 @@ namespace Graphs
             Orientation = obj.Orientation;
             amount = obj.amount;
         }
-        public string addNode(string name)
-        {
-            string temp;
-            if (AdjList.ContainsKey(name))
-            {
-                temp = $"Вершина с именем {name} уже существует";
-            }
-            else
-            {
+        public void addNode(string name)
+        {           
                 ++amount;
                 AdjList.Add(name, new Dictionary<string, int>());
-                temp = $"Вершина {name} успешно добавлена";
-            }
-            return temp;
         }
-        public string deleteNode(string name)
+        public void deleteNode(string name)
         {
-            string temp;
-            if (AdjList.ContainsKey(name))
+            foreach (KeyValuePair<string, Dictionary<string, int>> top in AdjList)
             {
-                foreach(KeyValuePair<string,Dictionary<string,int>> top in AdjList)
-                {
-                    top.Value.Remove(name);
-                }
-                AdjList.Remove(name);
-                temp = $"Вершина {name} удалена";
-                --amount;
+                top.Value.Remove(name);
             }
-            else
-            {
-                temp = $"Вершины с названием {name} не существует";
-            }
-            return temp;
+            AdjList.Remove(name);
+            --amount;
         }
-        public string addEdje(string a, string b)
+        public void addEdje(string a, string b)
         {
-            bool aCheck = AdjList.ContainsKey(a);
-            bool bCheck = AdjList.ContainsKey(b);
-            if (!aCheck && !bCheck)
-            {
-                return ($"Вершин с именами {a} и {b} не существует");
-            }
-            if (!aCheck)
-            {
-                return ($"Вершины с именем {a} не существует");
-            }
-            if (!bCheck)
-            {
-                return ($"Вершины с именем {b} не существует");
-            }
-            if (AdjList[a].ContainsKey(b))
-            {
-                if (Orientation)
-                {
-                    return $"Из вершины {a} в {b} уже существует дуга";
-                }
-                else
-                {
-                    return $"Между вершинами {a} и {b} уже существует ребро";
-                }
-            }
-            if (Orientation)
-            {
-                AdjList[a].Add(b, 0);
-                return $"Дуга из вершины {a} в {b} добавлена";
-            }
-            else
-            {
-                AdjList[a].Add(b, 0);
-                AdjList[b].Add(a, 0);
-                return $"Ребро между вершинами {a} и {b} добавлено";
-            }
+            AdjList[a].Add(b, 0);
+            AdjList[b].Add(a, 0);
         }
-        public string addEdje(string a, string b,int c)
+        public void addEdjeOr(string a, string b)
         {
-            bool aCheck = AdjList.ContainsKey(a);
-            bool bCheck = AdjList.ContainsKey(b);
-            if (!aCheck && !bCheck)
-            {
-                return ($"Вершин с именами {a} и {b} не существует");
-            }
-            if (!aCheck)
-            {
-                return ($"Вершины с именем {a} не существует");
-            }
-            if (!bCheck)
-            {
-                return ($"Вершины с именем {b} не существует");
-            }
-            if (AdjList[a].ContainsKey(b))
-            {
-                if (Orientation)
-                {
-                    return $"Из вершины {a} в {b} уже существует дуга";
-                }
-                else
-                {
-                    return $"Между вершинами {a} и {b} уже существует ребро";
-                }
-            }
-            if (Orientation)
-            {
-                AdjList[a].Add(b, c);
-                return $"Дуга из вершины {a} в {b} добавлена";
-            }
-            else
-            {
-                AdjList[a].Add(b, c);
-                AdjList[b].Add(a, c);
-                return $"Ребро между вершинами {a} и {b} добавлено";
-            }
+            AdjList[a].Add(b, 0);
         }
-        public string deleteEdje(string a, string b)
+        public void addEdje(string a, string b, int c )
         {
-            bool aCheck = AdjList.ContainsKey(a);
-            bool bCheck = AdjList.ContainsKey(b);
-            if (!aCheck && !bCheck)
-            {
-                return ($"Вершин с именами {a} и {b} не существует");
-            }
-            if (!aCheck)
-            {
-                return ($"Вершины с именем {a} не существует");
-            }
-            if (!bCheck)
-            {
-                return ($"Вершины с именем {b} не существует");
-            }
-            if (!AdjList[a].ContainsKey(b))
-            {
-                if (Orientation)
-                {
-                    return $"Из вершины {a} в {b} не существует дуги";
-                }
-                else
-                {
-                    return $"Между вершинами {a} и {b} не существует ребра";
-                }
-            }
-            if (Orientation)
-            {
-                AdjList[a].Remove(b);
-                return $"Дуга из вершины {a} в {b} удалена";
-            }
-            else
-            {
-                AdjList[a].Remove(b);
-                AdjList[b].Remove(a);
-                return $"Ребро между вершинами {a} и {b} удалено";
-            }
+            AdjList[a].Add(b, c);
+            AdjList[b].Add(a, c);
         }
-        
+        public void addEdjeOr(string a, string b, int c)
+        {
+            AdjList[a].Add(b, c);
+        }
+
+        public void deleteEdjeOr(string a, string b)
+        {
+            AdjList[a].Remove(b);
+        }
+        public void deleteEdje(string a, string b)
+        {
+            AdjList[a].Remove(b);
+            AdjList[b].Remove(a);
+        }        
     }
 }

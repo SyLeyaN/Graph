@@ -6,7 +6,7 @@ namespace Graphs
     {
         static void Main(string[] args)
         {
-            
+            int ab = 252323;
         }
     }
 }

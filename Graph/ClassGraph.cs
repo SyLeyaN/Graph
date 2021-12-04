@@ -20,7 +20,7 @@ namespace Graphs
         }
         public Graph(string file)
         {
-            using (StreamReader fileIn = new StreamReader($"C:/Users/Narut0/source/repos/Graph/Graph/Graphs/{file}"))
+            using (StreamReader fileIn = new StreamReader($"C:/Users/SyLeyaN/source/repos/ConsoleApp1/ConsoleApp1/Graph/{file}"))
             {
                 List<string> status = new List<string>(fileIn.ReadLine().Split(" "));
                 if (status.Contains("o"))
@@ -66,20 +66,23 @@ namespace Graphs
         }
         public Graph(Graph obj)
         {
-            for(int i = 0; i < obj.AdjList.Count; ++i)
+            foreach (KeyValuePair<string, Dictionary<string, int>> pair in obj.AdjList)
             {
-                foreach(KeyValuePair<string, Dictionary<string, int>> pair in obj.AdjList)
+                Dictionary<string, int> temp = new Dictionary<string, int>();
+                foreach (KeyValuePair<string, int> smej in pair.Value)
                 {
-                    AdjList.Add(pair.Key, pair.Value);
+                    temp.Add(smej.Key, smej.Value);
                 }
+                AdjList.Add(pair.Key, temp);
             }
+
             Weight = obj.Weight;
             Orientation = obj.Orientation;
             amount = obj.amount;
         }
         public void saveGraph(string file)
         {
-            using (StreamWriter fileOut = new StreamWriter($"C:/Users/Narut0/source/repos/Graph/Graph/Graphs/{file}"))
+            using (StreamWriter fileOut = new StreamWriter($"E:/Код/Graph/Graph/Graphs/Save/{file}"))
             {
                 string temp = "";
                 if (Orientation)
@@ -166,6 +169,21 @@ namespace Graphs
         {
             AdjList[a].Remove(b);
             AdjList[b].Remove(a);
+        }
+        public void Ia()
+        {
+            if (Orientation == false)
+            {                
+                foreach (string firstKey in AdjList.Keys)
+                {
+                    System.Console.WriteLine($"{firstKey}: {AdjList[firstKey].Count}");
+                }
+                System.Console.WriteLine();
+            }
+            else
+            {
+                System.Console.WriteLine("Oriented graph");
+            }
         }
         public Dictionary<string, Dictionary<string, int>> GetAdjList
         {

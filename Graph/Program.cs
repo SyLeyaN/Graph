@@ -15,6 +15,8 @@ namespace Graphs
             ConsoleGraph.deleteEdje(temp, "b", "new");
             temp.saveGraph("test.txt");
             ConsoleGraph.showGraph(temp);
+            ConsoleGraph.Ia(temp);
+            
         }
     }
 }

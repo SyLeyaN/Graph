@@ -223,6 +223,12 @@ namespace Graphs
                 }
             }
         }
+        public static void Ia(Graph graph)
+        {
+            System.Console.WriteLine("\nTask Ia:");
+            graph.Ia();
+
+        }
 
     }
 }

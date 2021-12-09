@@ -223,12 +223,33 @@ namespace Graphs
                 }
             }
         }
-        public static void Ia(Graph graph)
+        public static void Ia_3(Graph graph)
         {
-            System.Console.WriteLine("\nTask Ia:");
-            graph.Ia();
+            System.Console.WriteLine("\nTask Ia_3:");
+            graph.Ia_3();
 
         }
 
+        public static void Ia_16(Graph graph, string a, string b)
+        {
+            Console.WriteLine("\nTask Ia_16:");
+            graph.Ia_16(a, b);
+        }
+
+        public static void II_6(Graph graph)
+        {
+            System.Console.WriteLine("\nTask II_6:");
+            graph.II_6();
+        }
+        public static void III(Graph graph,string a)
+        {
+            Console.WriteLine("\nTask III");
+            graph.III(a);
+        }
+        public static void Ib_8(Graph a, Graph b)
+        {
+            Console.WriteLine("\nTask Ib_8");
+            a.Ib_8(a,b);
+        }
     }
 }

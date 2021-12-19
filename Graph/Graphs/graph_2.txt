@@ -1,4 +1,5 @@
 ﻿o 11
+r
 ba c d a w e
 a e w d
 e w c ba
@@ -7,6 +8,5 @@ w d e
 l e
 ar cion ba e
 leon e c
-r
 c
 d w ba ar

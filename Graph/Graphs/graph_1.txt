@@ -1,5 +1,5 @@
 ﻿o w 8
-a b 2 d 4 s 5
+a b 2 d 4 s -10
 b d 1 s 4
 s e 3
 d c 2

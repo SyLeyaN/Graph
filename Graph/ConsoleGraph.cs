@@ -229,13 +229,11 @@ namespace Graphs
             graph.Ia_3();
 
         }
-
         public static void Ia_16(Graph graph, string a, string b)
         {
             Console.WriteLine("\nTask Ia_16:");
             graph.Ia_16(a, b);
         }
-
         public static void II_6(Graph graph)
         {
             System.Console.WriteLine("\nTask II_6:");
@@ -250,6 +248,163 @@ namespace Graphs
         {
             Console.WriteLine("\nTask Ib_8");
             a.Ib_8(a,b);
+        }       
+        public static void V(Graph graph, string start, string end)
+        {
+            Console.WriteLine("\nTask V");
+            Console.WriteLine(graph.V(start, end));
         }
+        public static void II_18(Graph graph)
+        {
+            Console.WriteLine("\nTask II_18");
+            graph.II_18();
+        }
+        static Graph graph;
+        static int action = 0;
+        public static void Start(Graph graphNew)
+        {
+            graph = graphNew;
+            ShowMenu();
+            Console.WriteLine();
+            while (action != 7)
+            {
+                ReadKey();
+                SwitchAction(action);
+            }
+        }
+        static void ShowMenu()
+        {
+            Console.WriteLine("1. Добавить вершину.\n" +
+                              "2. Добавить ребро.\n" +
+                              "3. Удалить вершину.\n" +
+                              "4. Удалить ребро.\n" +
+                              "5. Показать список смежности.\n" +
+                              "6. Показать меню\n" +
+                              "7. Выйти из программы\n");
+
+        }
+        static void ReadKey()
+        {
+            Console.WriteLine("Введите номер действия, который вы хотите выполнить: ");
+            try
+            {
+                action = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                action = 0;
+            }
+
+        }
+        static void SwitchAction(int i)
+        {
+            switch (i)
+            {
+                case (1):
+                    {
+                        Console.WriteLine("Введите название новой вершины: ");
+                        ConsoleGraph.addNode(graph, Console.ReadLine());
+                        Console.WriteLine();
+                        break;
+                    }
+                case (2):
+                    {
+                        if (graph.GetWeight)
+                        {
+                            Console.WriteLine("Введите название двух вершин через пробел и весы(1-ая - откуда, 2-ая - куда и весы):");
+                            string[] temp = Console.ReadLine().Split(" ");
+                            try
+                            {
+                                ConsoleGraph.addEdje(graph, temp[0], temp[1], int.Parse(temp[2]));
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Весы должны быть целым числом");
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Введите название двух вершин через пробел (1-ая - откуда, 2-ая - куда):");
+                            string[] temp = Console.ReadLine().Split(" ");
+                            ConsoleGraph.addEdje(graph, temp[0], temp[1]);
+                        }
+                        Console.WriteLine();
+                        break;
+                    }
+                case (3):
+                    {
+                        Console.WriteLine("Введите название вершины которую хотите удалить:");
+                        ConsoleGraph.deleteNode(graph, Console.ReadLine());
+                        Console.WriteLine();
+                        break;
+                    }
+                case (4):
+                    {
+                        Console.WriteLine("Введите название двух вершин через пробел(1-ая - откуда, 2-ая - куда):");
+                        string[] temp = Console.ReadLine().Split(" ");
+                        ConsoleGraph.deleteEdje(graph, temp[0], temp[1]);
+                        Console.WriteLine();
+                        break;
+                    }
+                case (5):
+                    {
+                        Console.WriteLine();
+                        ConsoleGraph.showGraph(graph);
+                        Console.WriteLine();
+                        break;
+                    }
+                case (6):
+                    {
+                        Console.WriteLine();
+                        ShowMenu();
+                        Console.WriteLine();
+                        break;
+                    }
+                case (7):
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Конец");
+                        Console.WriteLine();
+                        break;
+
+                    }
+                default:
+                    {
+                        Console.WriteLine("Введено некорректное действие");
+                        Console.WriteLine();
+                        break;
+                    }
+            }
+        }
+
+        public static void IVc_8(Graph a, string Node, int n)
+        {
+            Console.WriteLine("\nTask IVc_8");
+            a.IVc_8(a.GetAdjList, Node, n);
+        }
+        public static void IVb_4(Graph graph, string u, string v1, string v2)
+        {
+            Console.WriteLine("\nTask IVb_4");
+            graph.IVb_4(u,v1,v2);
+        }//Разобраться
+        public static void IVa_2(Graph graph, string s)
+        {
+            Console.WriteLine("\nTaskIVa_2");
+            graph.IVa_2(s);
+        }//Разобраться
+        
+        
+       
     }
+
+
+
+
+
+
+
+
+
 }
+
